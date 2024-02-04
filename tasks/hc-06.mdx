@@ -1,0 +1,69 @@
+---
+title: Bluetooth module HC-06
+description: Tasks about HC-06 bluetooth module usage with Arduino.
+language: en
+---
+# Bluetooth module HC-06
+
+## Theory
+
+HC-06 is a simple Bluetooth module that is used for short-range wireless communication (less than 100m) that can be used with many microcontrollers and is easy to setup. 
+
+![hc-06](/images/hc-06.bmp)
+
+The HC-06 module has 4 pins:
+* RXD: Sends data **to Arduino from HC-06**. 3.3V logic. (RxD = Receive Data)
+* TXD: Sends data **to HC-06 from Arduino**. 3.3V logic (TxD = Transmit Data)
+* VCC: Power 5V.
+* GND: Ground.
+
+> HC-06 module uses 3.3V logic but arduino uses 5V logic. That means that if you want to send data from arduino to HC-06 you have to use **voltage divider** to drop signal voltage from 5V to ~3.3V. Nevertheles, arduino can read 3.3V digital signal, so no need to boost voltage of signal coming from HC-06 to arduino.
+
+To communicate with HC-06 using smartphone we will use Arduino Bluetooth Controller ([Android](https://play.google.com/store/apps/details?id=com.giumig.apps.bluetoothserialmonitor&hl=ru&gl=US)).
+
+In this list of tasks you will only use HC-06 to receive data from the phone, so you won't need to connect RXD port to Arduino. However, if you want to send data to a connected device or want to configure HC-06 using [AT command,](https://www.instructables.com/AT-command-mode-of-HC-05-Bluetooth-module/) you will have to use RXD pin.
+## 1. task. Setting up the module. 
+
+The easiest way to use HC-06 with Arduino is to use with SoftwareSerial library. Here is a code sample: 
+```cpp 
+#include <SoftwareSerial.h>
+
+SoftwareSerial BTSerial (2,3);
+
+#define PIN_RED 9
+#define PIN_GREEN 10
+#define PIN_BLUE 11
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  Serial.println("Enter AT Commands");
+  Serial.write(50);
+  BTSerial.begin(9600);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  if(BTSerial.available()){
+    // const int BT_INPUT = BTSerial.read();
+    const String BT_INPUT = Serial.readStringUntil('\n');
+    BT_INPUT.trim();
+    if(BT_INPUT.length() == 9) {
+      
+      const int red = BT_INPUT.substring(0, 3).toInt();
+      const int green = BT_INPUT.substring(3, 6).toInt();
+      const int blue = BT_INPUT.substring(6).toInt();
+
+      analogWrite(PIN_RED,   red);
+      analogWrite(PIN_GREEN, green);
+      analogWrite(PIN_BLUE,  blue);
+    }
+
+  }
+  if(Serial.available()){
+    BTSerial.write(Serial.read());
+  }
+}
+```
+
+As you can see it works.

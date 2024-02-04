@@ -1,3 +1,46 @@
+@import "./highlight-theme/tokyo-night-dark.css" (prefers-color-scheme: dark);
+@import "./highlight-theme/tokyo-night-light.css" (prefers-color-scheme: light);
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+
+    a {
+        color: var(--color-link);
+        transition: all .3s ease;
+    }
+
+    a:hover {
+        color: var(--color-link-active);
+        text-decoration: underline;
+    }
+
+    @media(prefers-color-scheme: dark) {
+        :root {
+            --color-primary: #ebf8f2;
+            --color-bgBase: #1a1b26;
+            --color-bgSecondary: #22232f;
+            --color-h1: #ff79c6;
+            --color-h2: #bd93f9;
+            --color-h3: #ff5555;
+            --color-active: #50fa70;
+            --color-link: #ffb85a;
+            --color-link-active: #8be9dd;
+        }
+    }
+    @media(prefers-color-scheme: light) {
+        :root {
+            --color-primary: #0c0c0c;
+            --color-bgBase: hsl(230, 10%, 88%);
+            --color-bgSecondary: hsl(230, 10%, 94%);
+            --color-h1: hsl(326, 100%, 44%);
+            --color-h2: hsl(265, 89%, 48%);
+            --color-h3: hsl(0, 100%, 47%);
+            --color-active: hsl(131, 70%, 46%);
+            --color-link: hsl(34, 100%, 50%);
+            --color-link-active: hsl(172, 68%, 45%);
+        }
+    }
+}
