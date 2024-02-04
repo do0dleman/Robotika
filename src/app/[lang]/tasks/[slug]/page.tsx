@@ -4,14 +4,15 @@ import path from "path"
 import matter from "gray-matter"
 import MDXRemoteWrapper from "~/app/_components/mdx/MDXRemoteWrapper"
 import Link from "next/link"
+import { Locale } from "i18n.config"
 
-async function Task({ params }: { params: { slug: string } }) {
+async function Task({ params }: { params: { lang: Locale, slug: string } }) {
     const { publicRuntimeConfig } = getConfig()
     const TASK_DIR = publicRuntimeConfig.taskDir
 
     let file
     try {
-        file = await fs.readFile(path.join(process.cwd(), TASK_DIR, params.slug + '.mdx'), {
+        file = await fs.readFile(path.join(process.cwd(), TASK_DIR, params.slug + `-${params.lang}` + '.mdx'), {
             encoding: "utf-8"
         })
     } catch { }
@@ -26,7 +27,6 @@ async function Task({ params }: { params: { slug: string } }) {
     }
 
     const fileData = matter(file)
-
 
     return (
         <MDXRemoteWrapper source={fileData.content} />

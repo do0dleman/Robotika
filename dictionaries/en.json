@@ -1,0 +1,12 @@
+{
+    "header": {
+        "title": "Robotics",
+        "tasks": "Tasks"
+    },
+    "taskList": {
+        "title": "Task List"
+    },
+    "bitmapDrawer": {
+        "title": "Bitmap Drawer"
+    }
+}

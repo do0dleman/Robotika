@@ -1,0 +1,12 @@
+{
+    "header": {
+        "title": "Robotika",
+        "tasks": "Uzdevumi"
+    },
+    "taskList": {
+        "title": "Uzdevumu Saraksts"
+    },
+    "bitmapDrawer": {
+        "title": "Bitkartes Zīmētājs"
+    }
+}
