@@ -3,6 +3,9 @@
         "title": "Robotics",
         "tasks": "Tasks"
     },
+    "footer": {
+        "title": "Website made by Ņikita Obrazcovs in 2024"
+    },
     "taskList": {
         "title": "Task List"
     },

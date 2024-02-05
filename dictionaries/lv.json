@@ -3,6 +3,9 @@
         "title": "Robotika",
         "tasks": "Uzdevumi"
     },
+    "footer": {
+        "title": "Vietni izstrādāja Ņikita Obrazcovs 2024. gadā."
+    },
     "taskList": {
         "title": "Uzdevumu Saraksts"
     },
