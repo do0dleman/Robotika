@@ -52,7 +52,7 @@ void loop() {
 }
 ```
 
-> In this code example we must convert int to char. The main difference between char and int is that char represents a character, it may be '1' or 'A' or '@', but integer is a number. However under the hood char is also a number but it represents a character assigned to this number. In Arduino characters are encoded according to [ASCII Table](https://www.techonthenet.com/ascii/chart.php) . For instance char '1' is represented by number 49, char 'A' by number 65.
+> In this code example we must convert int to char to ger 0 or 1. The main difference between char and int is that char represents a character, it may be '1' or 'A' or '@', but integer represents a number. However, under the hood char is also a number, but it represents a character assigned to this number. In Arduino characters are encoded according to [ASCII Table](https://www.techonthenet.com/ascii/chart.php). For instance char '1' is represented by number 49, char 'A' by number 65.
 
 Open Arduino Bluetooth Controller, connect to the hc-06 module and select LED/Lamp Control (should be the first option). It should print 0 or 1 on button click.
 
