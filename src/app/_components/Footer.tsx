@@ -7,8 +7,8 @@ async function Footer({ params }: {
     const { footer } = await getDictionary(params.lang)
 
     return (
-        <div className="flex justify-center border-t border-primary py-4 px-4">
-            <h3 className="text-h3 text-lg">{footer.title}</h3>
+        <div className="flex justify-center border-t border-primary py-4 px-4 mt-12 md:mt-16">
+            <h3 className="text-h3 text-lg text-center">{footer.title}</h3>
         </div>
     )
 }
