@@ -7,6 +7,11 @@
 
 @layer base {
 
+    th,
+    td {
+        @apply border border-primary py-1 px-3;
+    }
+
     a {
         color: var(--color-link);
         transition: all .3s ease;
@@ -34,13 +39,13 @@
     @media(prefers-color-scheme: light) {
         :root {
             --color-primary: #0c0c0c;
-            --color-bgBase: hsl(230, 10%, 88%);
+            --color-bgBase: hsl(230, 10%, 90%);
             --color-bgSecondary: hsl(230, 10%, 94%);
-            --color-h1: hsl(326, 100%, 44%);
+            --color-h1: hsl(326, 79%, 49%);
             --color-h2: hsl(265, 89%, 48%);
             --color-h3: hsl(0, 100%, 47%);
             --color-active: hsl(131, 70%, 46%);
-            --color-link: hsl(34, 100%, 50%);
+            --color-link: hsl(34, 95%, 45%);
             --color-link-active: hsl(172, 68%, 45%);
             --color-info: hsl(212, 100%, 40%);
         }
