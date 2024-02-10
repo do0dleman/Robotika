@@ -65,6 +65,12 @@ void loop() {
 }
 ```
 
+> `lc.setLed` method accepts 4 parametrs:
+> * addr - adress of the display (in this case 0 because we have only 1 display)
+> * row - x coordinate of the pixel (from 0 to 7) 
+> * col - y coordinate of the pixel (from 0 to 7) 
+> * state - LED state as boolean (true = on, false = off)
+
 ### Criteria Table
 
 |       Criteria                                               | Yes | No | Partly |
@@ -72,7 +78,22 @@ void loop() {
 | The matrix module is connected correctly                     |     |    |        |
 | The matrix LEDs blink one after another                      |     |    |        |
 
-## Task 3. Bitmaps
+## Task 3. Turning on pixels by coordinates
+
+Write a programm that turns on the pixels using `lc.setLed` in a pattern as shown on the image below. The pixel in the top left corner has coordinates (0, 0) and is on. 
+
+![matrix pattern](/images/matrix-pattern.png)
+
+### Criteria Table
+
+|       Criteria                                               | Yes | No | Partly |
+| ------------------------------------------------------------ | --- | -- | ------ |
+| The matrix module is connected correctly                     |     |    |        |
+| The matrix LEDs are on as shown on the image                 |     |    |        |
+| Can explain how the code works                               |     |    |        |
+
+
+## Task 4. Bitmaps
 
 In previous example we used `lc.setLed` function to change state of a single LED. It works fine but when we want to draw an image it is reasonable to use bitmaps to store image data. We can use `lc.setRow` function to set a row by an 8 bit or 1 byte number.
 
@@ -145,7 +166,7 @@ Now try drawing your own bitmap and add it as 3rd image in this code example. Yo
 
 
 
-## Task 4. Animation
+## Task 5. Animation
 
 Animate a single pixel that moves from top-left corner to -> top-right -> bottom-right -> bottom-left.
 
@@ -158,7 +179,7 @@ Animate a single pixel that moves from top-left corner to -> top-right -> bottom
 | Pixel runs around the edge of the matrix in a loop           |     |    |        |
 | Can explain how the code works                               |     |    |        |
 
-## **Task 5*. Bouncing screensaver
+## **Task 6*. Bouncing screensaver
 
 On many DVD players there is a screensaver where DVD logo bounces from one part of the screen to another. Try implementing something simmilar with 8x8 LED matrix. Make the block 1x2 pixels.
 

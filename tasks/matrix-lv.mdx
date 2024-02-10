@@ -48,14 +48,14 @@ const int CLK = 12;
 LedControl lc = LedControl(DIN, CLK, CS, 0);
 
 void setup() {
-  // Display setup
+  // matricas iestatīšana
   lc.shutdown(0, false);
   lc.setIntensity(0, 0);
   lc.clearDisplay(0);
 }
 
 void loop() {
-  // Run over all leds and blink them
+  // Pāriet caur visiem LED un mirgot tos.
   for(int j = 0; j < 8; j++) {
      for(int i = 0; i < 8; i++) {
        lc.setLed(0, j, i, true);
@@ -72,6 +72,21 @@ void loop() {
 | ------------------------------------------------------ | -- | -- | ------ |
 | Matricas modulis ir savienots pareizi                  |    |    |        |
 | Matricas LED mirgo viens pēc otra                      |    |    |        |
+
+## Uzdevums 3. Pikseļu ieslēgšana pēc koordinātēm
+
+Uzraksti programmu, kas ieslēdz pikseļus, izmantojot `lc.setLed`, saskaņā ar attēlā redzamo paternu. Pikselis augšējā kreisajā stūrī ir koordinātās (0, 0) un ir ieslēgts.
+
+![matrix pattern](/images/matrix-pattern.png)
+
+### Kritēriju tabula
+
+
+|       Kritēriji                                        | Jā | Nē | Daļēji |
+| ------------------------------------------------------ | -- | -- | ------ |
+| Matricas modulis ir savienots pareizi                  |    |    |        |
+| Matricas LED ir ieslēgti atbilstoši attēlam            |    |    |        |
+| Prot paskaidrot kodu                                   |    |    |        |
 
 ## Uzdevums 3. Bitkartes
 
@@ -139,10 +154,10 @@ Tagad mēģini uzzīmēt savu bitkarti un to attēlot uz LED matricas. Var izman
 
 |       Kritēriji                                          | Jā | Nē | Daļēji |
 | -------------------------------------------------------- | -- | -- | ------ |
-| Matricas modulis ir savienots pareizi                   |     |    |        |
-| Matrica parāda 2 iepriekšielādētus attēlus              |     |    |        |
-| Matrica parāda pašizveidotu attēlu                      |     |    |        |
-| Prot paskaidrot kodu                                    |     |    |        |
+| Matricas modulis ir savienots pareizi                    |    |    |        |
+| Matrica parāda 2 iepriekšielādētus attēlus               |    |    |        |
+| Matrica parāda pašizveidotu attēlu                       |    |    |        |
+| Prot paskaidrot kodu                                     |    |    |        |
 
 ## Uzdevums 4. Animācija
 

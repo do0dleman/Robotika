@@ -1,0 +1,168 @@
+---
+title: 3. 8x8 LED matrix with HC-06
+description: Tasks about using HC-06 bluetooth module in pair with 8x8 LED matrix with Arduino.
+---
+# 8x8 LED matrix with HC-06
+
+## Reference
+
+In this tasks you will use HC-06 bluetooth module with Arduino to control 8x8 LED matrix. If you need to revise info about either of those, feel free to go to previous topics: [LED matrix](/en/tasks/matrix), [HC-06](/en/tasks/hc-06).
+
+## Task 1. Toggling the image
+
+Write a code that makes the 8x8 matrix show 1 of 2 preloaded images and that can switch between the images via Arduino Bluetooth Controller app. You can use this [Bitmap Drawer](/en/tools/bitmapDrawer).
+
+
+Here is the starter code:
+
+```c++
+#include <SoftwareSerial.h>
+#include <LedControl.h>
+
+const int DIN = 10;
+const int CS  = 11;
+const int CLK = 12;
+
+LedControl lc = LedControl(DIN, CLK, CS, 0);
+
+SoftwareSerial BTSerial(2,3);
+
+void setup() {
+  // Serial setup
+  Serial.begin(9600);
+  Serial.println("up and running");
+  BTSerial.begin(9600);
+
+  // Display setup
+  lc.shutdown(0, false);
+  lc.setIntensity(0, 0);
+  lc.clearDisplay(0);
+}
+
+void loop() {
+    
+}
+```
+
+### Criteria Table
+
+|       Criteria                                               | Yes | No | Partly |
+| ------------------------------------------------------------ | --- | -- | ------ |
+| The matrix module is connected correctly                     |     |    |        |
+| The HC-06 is connected correctly                             |     |    |        |
+| The matrix displays the images                               |     |    |        |
+| The matrix switches the images via phone app                 |     |    |        |
+
+## Task 2. Pixel Controller
+
+This code handles bottom button click from Arduino Bluetooth Controller gamepad.
+
+```c++
+#include <SoftwareSerial.h>
+#include <LedControl.h>
+
+const int DIN = 10;
+const int CS  = 11;
+const int CLK = 12;
+
+LedControl lc = LedControl(DIN, CLK, CS, 0);
+
+SoftwareSerial BTSerial(2,3);
+
+void setup() {
+  // Serial setup
+  Serial.begin(9600);
+  Serial.println("up and running");
+  BTSerial.begin(9600);
+
+  // Display setup
+  lc.shutdown(0, false);
+  lc.setIntensity(0, 0);
+  lc.clearDisplay(0);
+}
+
+// struct is a custom type that contains
+// fields defined in code in this case
+// those are x and y coordinates
+struct pos {
+  byte x = 0;
+  byte y = 0;
+};
+
+void loop() {
+  String BT_INPUT = "";
+  pos pixelPos;
+  
+  // We create an inner loop in the Arduino loop 
+  // to create global variables BT_INPUT and pixelPos
+  while (true) {
+    if(BTSerial.available()){
+      // Reads string until character '0' shows up  
+      BT_INPUT = BTSerial.readStringUntil('0');
+      Serial.println(BT_INPUT);
+    }
+    if (BT_INPUT == "B") {
+      // Check if pixel doesn't go out of the matrix display  
+      if (pixelPos.x < 7) {
+        // Turn of pixel on the previous position
+        lc.setLed(0, pixelPos.x, pixelPos.y, false);
+        pixelPos.x += 1;
+      }
+    }
+    // Turn on pixel on the new position
+    lc.setLed(0, pixelPos.x, pixelPos.y, true);
+    // Clear the input so the if statement doesn't run infinitely
+    BT_INPUT = "";
+  }
+}
+```
+
+Modify the code so the user can move pixel in all 4 directions.
+
+> Arduino Bluetooth Controller gamepad sends a letter corresponding to a button on button press (in this case 'B' for bottom) and '0' on on button release. This is used in the code above to read command without using `BTSerial.readString` to avoid high input lag.
+
+### Criteria Table
+
+|       Criteria                                               | Yes | No | Partly |
+| ------------------------------------------------------------ | --- | -- | ------ |
+| The matrix module is connected correctly                     |     |    |        |
+| The HC-06 is connected correctly                             |     |    |        |
+| The pixel moves down                                         |     |    |        |
+| The pixel moves in all 3 other directions                    |     |    |        |
+
+## Task 3. Adding Obstacles
+
+Add obstacles using a bitmap to the matrix that the pixel cannot pass through. You can use this macros (basically function) that uses black magic called bit math:
+
+```c++
+// obstacles is a bitmap where the obstacles are stored
+// expression returns true if pixel with coordinates (x, y) is an obstacle
+#define isObstacle(x, y, obstacles) ((bool)(((obstacles[y] << (x)) & 0b10000000)))
+```
+
+> `#define` in C++ is used to define macros. Macros are values that are replaced at compile time, so they are not variables. For example, when we use this macro as a function in our code, it will be replaced with the expression that we defined. Thus, `isObstacle(5, 2, bitmap)` will become `(bool)(((bitmap[2] << (5)) & 0b10000000))`. You can learn more [here](https://www.codecademy.com/resources/docs/cpp/macros).
+
+### Criteria Table
+
+|       Criteria                                               | Yes | No | Partly |
+| ------------------------------------------------------------ | --- | -- | ------ |
+| The matrix module is connected correctly                     |     |    |        |
+| The HC-06 is connected correctly                             |     |    |        |
+| The pixel moves in all 4 directions                          |     |    |        |
+| Obstacles are being drawn                                    |     |    |        |
+| Pixel cannot pass through obstacles                          |     |    |        |
+
+## **Task 4*. Maze Game
+
+Write an algorithm that procedurally generates a maze as an obstacles bitmap.
+
+> You can use many different algorithms and approaches for this task. If you don't have any idea you can learn about DFS
+ (Deapth First Search) or MST (Minimum Spanning Tree) algorithms.
+
+ ### Criteria Table
+
+|       Criteria                                                                 | Yes | No | Partly |
+| ------------------------------------------------------------------------------ | --- | -- | ------ |
+| The pixel moves in all 4 directions                                            |     |    |        |
+| Maze is being drawn                                                            |     |    |        |
+| Maze is being generated on controller reload and differs form the previous one |     |    |        |
