@@ -28,6 +28,8 @@ export default async function TaskList({ params }: {
         return fileData.data
     }) as TaskModel[]
 
+    tasksData.sort((a, b) => a.title.localeCompare(b.title))
+
     const { taskList } = await getDictionary(params.lang)
 
     return (

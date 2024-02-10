@@ -1,5 +1,5 @@
 ---
-title: 8x8 dot matrix module with Max7219 controller
+title: 1. 8x8 dot matrix module with Max7219 controller
 description: Info & tasks about 8x8 dot matrix usage with Arduino.
 ---
 # 8x8 dot matrix module with Max7219 controller
@@ -24,6 +24,12 @@ Enter LedControl in the search field and download the first result.
 ![lib installation guide](/images/lib-manager.png)
 
 The library must show  in contributed library section under the Arduino libraries section.
+
+### Criteria Table
+
+|       Criteria                      | Yes | No |
+| ----------------------------------- | --- | -- |
+| LedControl is showed as "installed" |     |    |
 
 ## Task 2. Getting the matrix working
 
@@ -59,11 +65,18 @@ void loop() {
 }
 ```
 
+### Criteria Table
+
+|       Criteria                                               | Yes | No | Partly |
+| ------------------------------------------------------------ | --- | -- | ------ |
+| The matrix module is connected correctly                     |     |    |        |
+| The matrix LEDs blink one after another                      |     |    |        |
+
 ## Task 3. Bitmaps
 
 In previous example we used `lc.setLed` function to change state of a single LED. It works fine but when we want to draw an image it is reasonable to use bitmaps to store image data. We can use `lc.setRow` function to set a row by an 8 bit or 1 byte number.
 
-Load this code and explain what happens.
+Load this code and try to understand what happens.
 
 ```cpp
 #include <LedControl.h>
@@ -117,18 +130,42 @@ void loop(){
 }
 ```
 
-## Task 4. Draw your own bitmap
+> Letter B in front of a number means that the number is written in binary format, for instance, B101 is 5.
 
-Now try drawing your own bitmap and displaying it on LED matrix. You can use this [Bitmap Drawer](/en/tools/bitmapDrawer).
+Now try drawing your own bitmap and add it as 3rd image in this code example. You can use this [Bitmap Drawer](/en/tools/bitmapDrawer).
 
-## Task 5. Animation
+### Criteria Table
 
-Animate a single pixel that moves from top-left corner -> top-right -> bottom-right -> bottom-left.
+|       Criteria                                               | Yes | No | Partly |
+| ------------------------------------------------------------ | --- | -- | ------ |
+| The matrix module is connected correctly                     |     |    |        |
+| The matrix shows 2 preloaded images                          |     |    |        |
+| The matrix shows self made image                             |     |    |        |
+| Can explain how the code works                               |     |    |        |
+
+
+
+## Task 4. Animation
+
+Animate a single pixel that moves from top-left corner to -> top-right -> bottom-right -> bottom-left.
 
 ![pixel movement](/images/matrix-animation.png)
 
-## **Task 6*. Bouncing screensaver
+### Criteria Table
+
+|       Criteria                                               | Yes | No | Partly |
+| ------------------------------------------------------------ | --- | -- | ------ |
+| Pixel runs around the edge of the matrix in a loop           |     |    |        |
+| Can explain how the code works                               |     |    |        |
+
+## **Task 5*. Bouncing screensaver
 
 On many DVD players there is a screensaver where DVD logo bounces from one part of the screen to another. Try implementing something simmilar with 8x8 LED matrix. Make the block 1x2 pixels.
 
 ![dvd screensaver](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3diaXRkYzZ6ODZjOTcwOWl0YmNnajZhOXBybXB4MWRrbjk4dWl6cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/jqwzq0LoZOfLqqJZ0b/giphy.gif)
+### Criteria Table
+
+|       Criteria                                               | Yes | No | Partly |
+| ------------------------------------------------------------ | --- | -- | ------ |
+| 2x1 box bounces from the edge                                |     |    |        |
+| Can explain how the code works                               |     |    |        |

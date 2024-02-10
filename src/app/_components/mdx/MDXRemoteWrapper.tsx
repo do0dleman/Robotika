@@ -9,6 +9,7 @@ import Ul from '~/app/_components/mdx/Ul'
 import rehypeHighlight from 'rehype-highlight';
 import Image from "next/image"
 import remarkMdxImages from 'remark-mdx-images'
+import remarkGfm from 'remark-gfm'
 import Pre from "~/app/_components/mdx/Pre"
 import Code from "~/app/_components/mdx/Code"
 
@@ -20,7 +21,7 @@ function MDXRemoteWrapper({ source }: { source: string }) {
                     // @ts-expect-error: Something wrong with type definitions
                     rehypePlugins: [rehypeHighlight],
                     // @ts-expect-error: Something wrong with type definitions
-                    remarkPlugins: [remarkMdxImages],
+                    remarkPlugins: [remarkMdxImages, remarkGfm],
                     format: 'mdx',
                 }
             }}
