@@ -23,6 +23,10 @@
         text-decoration: underline;
     }
 
+    pre code {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
     @media(prefers-color-scheme: dark) {
         :root {
             --color-primary: #ebf8f2;
