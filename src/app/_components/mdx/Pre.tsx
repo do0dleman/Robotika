@@ -11,7 +11,7 @@ export default function Pre({ children, raw, lang }: PreProps) {
         <div className="mb-8 pb-4 bg-bgSecondary rounded-2xl overflow-hidden">
             <div className="pt-2 px-4 pb-2 text-2xl border-primary bg-bgTertiary 
             flex justify-between items-center">
-                <span>{lang}</span>
+                <h3 className="text-h3">{lang}</h3>
                 <CopyButton text={raw} />
             </div>
             <div className="px-4 pt-4">

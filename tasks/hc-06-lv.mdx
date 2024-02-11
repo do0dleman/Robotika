@@ -43,12 +43,12 @@ void setup() {
 void loop() {
   // Metods BTSerial.available atgriež
   // pieejamo baitu skaitu lasīšanai
-  if(BTSerial.available() > 0){
+  if(BTSerial.available() > 0){
     // Mēs nosūtām datus no HC-06 kā simbolus (char), bet  
     // BTSerial.read pēc noklusējuma atgriež veselus skaitļus (int)
     // Tāpēc mēs skaitli (int) pārvēršam par simbolu (char)
-    Serial.println((char)BTSerial.read());
-  }
+    Serial.println((char)BTSerial.read());
+  }
 }
 ```
 

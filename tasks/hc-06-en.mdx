@@ -33,22 +33,22 @@ SoftwareSerial BTSerial(2, 3);
 
 void setup() {
   // Start serial comunication between PC and Arduino
-  Serial.begin(9600);
-  Serial.println("up and running:");
+  Serial.begin(9600);
+  Serial.println("up and running:");
   
   // Start serial comunication between HC-06 and Arduino
-  BTSerial.begin(9600);
+  BTSerial.begin(9600);
 }
   
 void loop() {
   // BTSerial.available method returns
   // number of bytes available for reading
-  if(BTSerial.available() > 0){
+  if(BTSerial.available() > 0){
     // We send data as characters but 
     // BTSerial.read by default returns integers
     // So we excplicitly convert the integer to a character
-    Serial.println((char)BTSerial.read());
-  }
+    Serial.println((char)BTSerial.read());
+  }
 }
 ```
 
