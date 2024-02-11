@@ -55,13 +55,13 @@ void setup() {
 
 void loop() {
   // Run over all leds and blink them
-  for(int j = 0; j < 8; j++) {
-     for(int i = 0; i < 8; i++) {
-       lc.setLed(0, j, i, true);
-       delay(100);
-       lc.setLed(0, j, i, false);
-     }
-  }
+  for(int j = 0; j < 8; j++) {
+    for(int i = 0; i < 8; i++) {
+      lc.setLed(0, j, i, true);
+      delay(100);
+      lc.setLed(0, j, i, false);
+    }
+  }
 }
 ```
 

@@ -32,10 +32,12 @@
             --color-primary: #ebf8f2;
             --color-bgBase: #1a1b26;
             --color-bgSecondary: #22232f;
+            --color-bgTertiary: #2b2c3b;
             --color-h1: #ff79c6;
             --color-h2: #bd93f9;
             --color-h3: #ff5555;
             --color-active: #50fa70;
+            --color-inactive: hsl(152, 8%, 75%);
             --color-link: #ffb85a;
             --color-link-active: #8be9dd;
             --color-info: hsl(212, 100%, 60%);
@@ -44,12 +46,14 @@
     @media(prefers-color-scheme: light) {
         :root {
             --color-primary: #0c0c0c;
-            --color-bgBase: hsl(230, 10%, 90%);
-            --color-bgSecondary: hsl(230, 10%, 94%);
+            --color-bgBase: hsl(230, 0%, 87%);
+            --color-bgSecondary: hsl(230, 0%, 90%);
+            --color-bgTertiary: hsl(230, 0%, 92%);
             --color-h1: hsl(326, 79%, 49%);
             --color-h2: hsl(265, 89%, 48%);
             --color-h3: hsl(0, 100%, 47%);
             --color-active: hsl(131, 70%, 46%);
+            --color-inactive: hsl(0, 0%, 38%);
             --color-link: hsl(34, 95%, 45%);
             --color-link-active: hsl(172, 68%, 45%);
             --color-info: hsl(212, 100%, 40%);
