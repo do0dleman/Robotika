@@ -8,11 +8,11 @@ description: Info & tasks about 8x8 dot matrix usage with Arduino.
 
 Led Matrix is a relatively simple construction, just a bunch of LEDs. But if you want to control the whole matrix with Arduino, you will have to use a lot's pins to control all the LEDs. To minimize the amount of wires you can use a driver designed specifically for this purpose. In case of our 8x8 dot matrix this driver is called Max7219. 
 
-Max7219 driver allows us to control 64 LEDs using only 3 wires for communication with Arduino (another 2 for power). What's even better, we can chain this drivers and control even more LEDs still using only 3 wires for communication.
+Max7219 driver allows us to control 64 LEDs using only 3 wires for communication with Arduino (another 2 for power). What's even better, we can chain these drivers and control even more LEDs still using only 3 wires for communication.
 
 ![matrices](/images/matrices.png)
 
-Working with Max7219 driver using bare Arduino can be quite complicated. However there is a written library that will take care of all the hard parts of communication with it, it is called [LedControl](https://github.com/wayoda/LedControl).
+Working with Max7219 driver using bare Arduino can be quite complicated. However there is an already-written library that will take care of all the hard parts of communication with it, it is called [LedControl](https://github.com/wayoda/LedControl).
 ## Task 1. Getting the LedControl library
 
 Install the library via Arduino IDE. Go to "Sketch" -> "Include Library" -> "Manage Libraries..."
@@ -23,7 +23,7 @@ Enter LedControl in the search field and download the first result.
 
 ![lib installation guide](/images/lib-manager.png)
 
-The library must show  in contributed library section under the Arduino libraries section.
+The library must show up in contributed library section under the Arduino libraries section.
 
 ### Criteria Table
 
@@ -35,7 +35,7 @@ The library must show  in contributed library section under the Arduino librarie
 
 ![Circuit-8x8-LED-Matrix-Arduino](/images/matrix-pinout.webp)
 
-Connect LED matrix to Arduino according to constants in a sketch provided below (you can change them if you want). Load the sketch into Arduino to make sure that everything works. It should run over all LED in the matrix and blink them.
+Connect LED matrix to Arduino according to constants in a sketch provided below (you can change them if you want). Load the sketch into Arduino to make sure that everything works. It should run over all LEDs in the matrix and blink them.
 
 ```c++
 #include <LedControl.h>
@@ -95,7 +95,7 @@ Write a programm that turns on the pixels using `lc.setLed` in a pattern as show
 
 ## Task 4. Bitmaps
 
-In previous example we used `lc.setLed` function to change state of a single LED. It works fine but when we want to draw an image it is reasonable to use bitmaps to store image data. We can use `lc.setRow` function to set a row by an 8 bit or 1 byte number.
+In previous example we used `lc.setLed` function to change state of a single LED. It works fine but when we want to draw an image it is reasonable to use bitmaps to store image data instead. We can use `lc.setRow` function to set a row by an 8 bit or 1 byte number.
 
 Load this code and try to understand what happens.
 
@@ -164,8 +164,6 @@ Now try drawing your own bitmap and add it as 3rd image in this code example. Yo
 | The matrix shows self made image                             |     |    |        |
 | Can explain how the code works                               |     |    |        |
 
-
-
 ## Task 5. Animation
 
 Animate a single pixel that moves from top-left corner to -> top-right -> bottom-right -> bottom-left.
@@ -181,7 +179,7 @@ Animate a single pixel that moves from top-left corner to -> top-right -> bottom
 
 ## **Task 6*. Bouncing screensaver
 
-On many DVD players there is a screensaver where DVD logo bounces from one part of the screen to another. Try implementing something simmilar with 8x8 LED matrix. Make the block 1x2 pixels.
+On many DVD players there is a screensaver where DVD logo bounces from one part of the screen to another. Try implementing something simmilar with 8x8 LED matrix. Make the block with size 1x2 pixels.
 
 ![dvd screensaver](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3diaXRkYzZ6ODZjOTcwOWl0YmNnajZhOXBybXB4MWRrbjk4dWl6cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/jqwzq0LoZOfLqqJZ0b/giphy.gif)
 ### Criteria Table
