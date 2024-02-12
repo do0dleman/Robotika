@@ -6,7 +6,12 @@
 @tailwind utilities;
 
 @layer base {
-
+    @media(max-width: 450px) {
+        table {
+            font-size: .8em;
+        }
+    
+    }
     th,
     td {
         @apply border border-primary py-1 px-3;

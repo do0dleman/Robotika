@@ -31,7 +31,7 @@ export default function RootLayout({
         <TRPCReactProvider>
           <div className="flex flex-col h-[100dvh] relative">
             <Header params={params} />
-            <div className="container xl:max-w-6xl m-auto mt-32 text-xl">
+            <div className="container xl:max-w-6xl m-auto mt-32 text-xl px-4">
               {children}
             </div>
             <Footer params={params} />
