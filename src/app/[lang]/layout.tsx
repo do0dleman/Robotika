@@ -27,11 +27,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang={params.lang}>
-      <body className={`font-sans ${inter.variable} bg-bgBase text-primary px-4`}>
+      <body className={`font-sans ${inter.variable} bg-bgBase text-primary`}>
         <TRPCReactProvider>
-          <div className="flex flex-col h-[100dvh]">
+          <div className="flex flex-col h-[100dvh] relative">
             <Header params={params} />
-            <div className="container xl:max-w-6xl m-auto mt-4 text-xl">
+            <div className="container xl:max-w-6xl m-auto mt-32 text-xl">
               {children}
             </div>
             <Footer params={params} />
