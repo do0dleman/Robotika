@@ -2,6 +2,7 @@ import { getDictionary } from "dictionaries/dictionary";
 import { Locale } from "i18n.config";
 import Link from "next/link";
 import { FaRobot, FaGithub } from "react-icons/fa";
+import A from "./mdx/A";
 
 export default async function Header({ params }: {
     params: { lang: Locale }
@@ -16,11 +17,12 @@ export default async function Header({ params }: {
                 </Link>
                 <nav>
                     <ul className="flex gap-x-6 text-xl items-center">
-                        <li><Link href={`/${params.lang}/tasks`}>{header.tasks}</Link></li>
+                        <li><A noIcon href={`/${params.lang}/tasks`}>{header.tasks}</A></li>
                         <li className="text-4xl">
                             <Link
                                 className="text-primary opacity-75 hover:text-primary 
-                                hover:opacity-90 active:opacity-100 "
+                                hover:opacity-90 active:opacity-100 transition-all
+                                duration-300"
                                 target="_blank"
                                 href="https://github.com/do0dleman/Robotika">
                                 <FaGithub />
