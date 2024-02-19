@@ -21,7 +21,12 @@ const config = {
     },
     publicRuntimeConfig: {
         taskDir: 'tasks'
-    }
+    },
+    webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+        // Important: return the modified config
+        config.cache = false
+        return config
+    },
 };
 
 // const withMDX = next_mdx({
