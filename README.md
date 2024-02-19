@@ -9,3 +9,7 @@ Curently 2 locales are available: `en` and `lv`. Translation for web page elemen
 ## How task sheets are stored?
 
 All task sheets are stored in `task_sheets` folder. Each task sheet is a separate `.mdx` file. Task sheets locale is specified at the end of a file name and is separated with '-' character (e.g. `matrix-en`, `matrix-lv`). All media files (e.g. images) are stored in `public` directory.
+
+## License
+
+See the [LICENSE](https://github.com/do0dleman/Robotika/blob/main/LICENSE) file (MIT).
