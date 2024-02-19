@@ -19,7 +19,8 @@ export default async function Header({ params }: {
                         <li><Link href={`/${params.lang}/tasks`}>{header.tasks}</Link></li>
                         <li className="text-4xl">
                             <Link
-                                className="text-primary opacity-75 hover:text-primary hover:opacity-90 active:opacity-100"
+                                className="text-primary opacity-75 hover:text-primary 
+                                hover:opacity-90 active:opacity-100 "
                                 target="_blank"
                                 href="https://github.com/do0dleman/Robotika">
                                 <FaGithub />
