@@ -1,0 +1,186 @@
+---
+title: 1. 8x8 LED matricas modulis ar Max7219 kontrolieri
+description: Uzdevumi pār 8x8 LED matricas lietošanu ar Arduino.
+---
+# 8x8 LED matricas modulis ar Max7219 kontrolieri
+  
+## Teorija
+
+Led matrica ir relatīvi vienkārša konstrukcija, kas sastāv tikai no daudziem LED. Bet, lai vadītu visu matricu ar Arduino, būs jāizmanto daudz pinu, lai kontrolētu visas LED. Lai samazinātu vadu skaitu, var izmantot speciāli šim nolūkam izstrādātu driveri. Mūsu 8x8 punktu matricas gadījumā šis drivers saucas Max7219.
+
+Max7219 drivers  ļauj kontrolēt 64 LED, izmantojot tikai 3 vadus, lai sazinātos ar Arduino (vēl 2 vadus barošanai). Iespējams arī savienot vairākus šādus driverus kopā un kontrolēt vēl vairāk LED, izmantojot tikai 3 vadus saziņai.
+
+![matrices](/images/matrices.png)
+
+Darbs ar Max7219 driveru, izmantojot tikai Arduino, var būt diezgan sarežģīts. Tomēr ir pieejama bibliotēka, kas paņems uz sevi visus sarežģītos komunikācijas aspektus. Tā saucas [LedControl](https://github.com/wayoda/LedControl).
+
+## Uzdevums 1. LedControl bibliotēkas iegūšana
+
+Instalē bibliotēku, izmantojot Arduino IDE. Atver "Sketch" -> "Include Library" -> "Manage Libraries..."
+
+![lib installation guide](/images/lib-install.png)
+
+Ievadi "LedControl" meklēšanas laukā un lejupielādē pirmo rezultātu.
+
+![lib installation guide](/images/lib-manager.png)
+
+Bibliotēkai jāparādās "Contributed Libraries" sadaļā zem "Arduino Libraries" sadaļas.
+
+### Kritēriju tabula
+
+|            Kritēriji                     | Jā | Nē |
+| ---------------------------------------- | -- | -- |
+| LedControl tiek parādīts kā  "installed" |    |    |
+
+## Uzdevums 2. Matricas savienošana ar Arduino.
+
+![Circuit-8x8-LED-Matrix-Arduino](/images/matrix-pinout.webp)
+
+Savieno LED matricu ar Arduino atbilstoši konstantēm, kas ir dotas zemāk esošajā programmas gabalā (vari tos mainīt, ja vēlies). Ielādē šo programmu Arduino, lai pārliecinātos, ka viss darbojas. Tā vajadzētu pārlēkt cauri visām LED matricas gaismām un mirgot tām.
+
+```c++
+#include <LedControl.h>
+
+const int DIN = 10;
+const int CS  = 11;
+const int CLK = 12;
+
+LedControl lc = LedControl(DIN, CLK, CS, 0);
+
+void setup() {
+  // matricas iestatīšana
+  lc.shutdown(0, false);
+  lc.setIntensity(0, 0);
+  lc.clearDisplay(0);
+}
+
+void loop() {
+  // Pāriet caur visiem LED un mirgot tos.
+  for(int j = 0; j < 8; j++) {
+     for(int i = 0; i < 8; i++) {
+       lc.setLed(0, j, i, true);
+       delay(100);
+       lc.setLed(0, j, i, false);
+     }
+  }
+}
+```
+
+### Kritēriju tabula
+
+|       Kritēriji                                        | Jā | Nē | Daļēji |
+| ------------------------------------------------------ | -- | -- | ------ |
+| Matricas modulis ir savienots pareizi                  |    |    |        |
+| Matricas LED mirgo viens pēc otra                      |    |    |        |
+
+## Uzdevums 3. Pikseļu ieslēgšana pēc koordinātēm
+
+Uzraksti programmu, kas ieslēdz pikseļus, izmantojot `lc.setLed`, saskaņā ar attēlā redzamo paternu. Pikselis augšējā kreisajā stūrī ir koordinātās (0, 0) un ir ieslēgts.
+
+![matrix pattern](/images/matrix-pattern.png)
+
+### Kritēriju tabula
+
+
+|       Kritēriji                                        | Jā | Nē | Daļēji |
+| ------------------------------------------------------ | -- | -- | ------ |
+| Matricas modulis ir savienots pareizi                  |    |    |        |
+| Matricas LED ir ieslēgti atbilstoši attēlam            |    |    |        |
+| Prot paskaidrot kodu                                   |    |    |        |
+
+## Uzdevums 3. Bitkartes
+
+Iepriekšējā piemērā mēs izmantojām funkciju `lc.setLed`, lai mainītu atsevišķas LED stāvokli. Tas darbojas labi, bet, kad vēlamies zīmēt attēlu, ir saprātīgi izmantot bitkartes, lai glabātu attēla datus. Mēs varam izmantot funkciju `lc.setRow`, lai iestatītu rindu ar 8 bitiem vai 1 baitu skaitli.
+
+Ielādē šo kodu un paskaidro, kas notiek.
+
+```c++
+#include <LedControl.h>
+
+const int DIN = 10;
+const int CS  = 11;
+const int CLK = 12;
+
+LedControl lc = LedControl(DIN, CLK, CS, 0);
+
+const byte Cat[8] = {
+  B10001000,
+  B11111000,
+  B10101000,
+  B01110001,
+  B00100001,
+  B01111001,
+  B01111101,
+  B10111110
+};
+
+const byte Apple[8] = {
+  B00011000,
+  B00001000,
+  B01110110,
+  B11111111,
+  B11111111,
+  B11111111,
+  B01111010,
+  B00110100
+};
+
+void setup() {
+  lc.shutdown(0, false);
+  lc.setIntensity(0, 0);
+  lc.clearDisplay(0);
+}
+
+void loop(){
+  for(int i = 0; i < 8 ; i++) {
+    lc.setRow(0, i, Apple[i]);
+  }
+  delay(5000);
+  lc.clearDisplay(0);
+  for(int i = 0; i < 8; i++) {
+    lc.setRow(0, i, Cat[i]);
+  }
+
+  delay(5000);
+  lc.clearDisplay(0);
+}
+```
+
+> Burts B priekšā skaitlim norāda, ka skaitlis ir rakstīts binārā formātā, piemēram, B101 ir 5.
+
+Tagad mēģini uzzīmēt savu bitkarti un to attēlot uz LED matricas. Var izmantot šo [Bitkartes zīmētāju](/lv/tools/bitmapDrawer).
+
+### Kritēriju tabula
+
+|       Kritēriji                                          | Jā | Nē | Daļēji |
+| -------------------------------------------------------- | -- | -- | ------ |
+| Matricas modulis ir savienots pareizi                    |    |    |        |
+| Matrica parāda 2 iepriekšielādētus attēlus               |    |    |        |
+| Matrica parāda pašizveidotu attēlu                       |    |    |        |
+| Prot paskaidrot kodu                                     |    |    |        |
+
+## Uzdevums 4. Animācija
+
+Veidojiet animāciju, kur viens pikselis pārvietojas no augšējās kreisās stūra -> augšējās labās stūrā -> apakšējās labās stūrā -> apakšējās kreisās stūrā.
+
+![pixel movement](/images/matrix-animation.png)
+
+### Kritēriju tabula
+
+|       Kritēriji                                        | Jā | Nē | Daļēji |
+| ------------------------------------------------------ | -- | -- | ------ |
+| Pikselis pārvietojas ap matricas malu cikla veidā.     |    |    |        |
+| Prot paskaidrot kodu                                   |    |    |        |
+
+## **Uzdevums 5*. DVD ekrānsaudzētājs
+
+Dažos DVD atskaņotājos ir ekrānsaudzētājs, kur DVD logotips atskalojas no vienas ekrāna daļas uz citu. Mēģiniet implementēt kaut ko līdzīgu ar 8x8 LED matricu. Izveidojiet bloku ar izmēriem 1x2 pikseļu.
+
+![dvd screensaver](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3diaXRkYzZ6ODZjOTcwOWl0YmNnajZhOXBybXB4MWRrbjk4dWl6cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/jqwzq0LoZOfLqqJZ0b/giphy.gif)
+
+### Kritēriju tabula
+
+|       Kritēriji                     | Jā | Nē | Daļēji |
+| ----------------------------------- | -- | -- | ------ |
+| 2x1 kaste atskalojas no malas       |    |    |        |
+| Prot paskaidrot kodu                |    |    |        |

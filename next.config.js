@@ -20,7 +20,7 @@ const config = {
         mdxRs: false
     },
     publicRuntimeConfig: {
-        taskDir: 'tasks'
+        taskDir: 'task_sheets'
     },
     webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
         // Important: return the modified config

@@ -1,0 +1,108 @@
+---
+title: 2. Bluetooth module HC-06
+description: Tasks about HC-06 bluetooth module usage with Arduino.
+---
+# Bluetooth module HC-06
+
+## Theory
+
+HC-06 is a simple Bluetooth module that is used for short-range wireless communication (less than 100m) that can be used with many microcontrollers and is easy to setup. The main flaw of HC-06 is its inability to work with iOS devices because it doesn't support Bluetooth LE (Low Energy).
+
+![hc-06](/images/hc-06.bmp)
+
+The HC-06 module has 4 pins:
+* RXD: Sends data **to Arduino from HC-06**. 3.3V logic. (RxD = Receive Data)
+* TXD: Sends data **to HC-06 from Arduino**. 3.3V logic (TxD = Transmit Data)
+* VCC: Power 5V.
+* GND: Ground.
+
+> HC-06 module uses 3.3V logic but arduino uses 5V logic. That means that if you want to send data from arduino to HC-06 you have to use **voltage divider** to drop signal voltage from 5V to ~3.3V. Nevertheles, arduino can read 3.3V digital signal, so no need to boost voltage of signal coming from HC-06 to arduino.
+
+To communicate with HC-06 using smartphone we will use Arduino Bluetooth Controller ([paly market](https://play.google.com/store/apps/details?id=com.giumig.apps.bluetoothserialmonitor)).
+
+In these tasks you will only use HC-06 to receive data from the phone, so you won't need to connect RXD port to Arduino. However, if you want to send data to a connected device or want to configure HC-06 using [AT command,](https://www.instructables.com/AT-command-mode-of-HC-05-Bluetooth-module/) you will have to use RXD pin.
+
+## Task 1. Setting up the module
+
+The easiest way to use HC-06 with Arduino is to use [SoftwareSerial](https://docs.arduino.cc/learn/built-in-libraries/software-serial/) library. Download the library and upload the given code into Arduino. 
+
+```c++
+#include <SoftwareSerial.h>
+
+SoftwareSerial BTSerial(2, 3);
+
+void setup() {
+  // Start serial comunication between PC and Arduino
+  Serial.begin(9600);
+  Serial.println("up and running:");
+  
+  // Start serial comunication between HC-06 and Arduino
+  BTSerial.begin(9600);
+}
+  
+void loop() {
+  // BTSerial.available method returns
+  // number of bytes available for reading
+  if(BTSerial.available() > 0){
+    // We send data as characters but 
+    // BTSerial.read by default returns integers
+    // So we excplicitly convert the integer to a character
+    Serial.println((char)BTSerial.read());
+  }
+}
+```
+
+> In this code example we must convert int to char to get 0 or 1. The main difference between char and int is that char represents a character, it may be '1' or 'A' or '@', but integer represents a number. However, under the hood char is also a number, but it represents **a character assigned to this number**. In Arduino characters are encoded according to [ASCII Table](https://www.techonthenet.com/ascii/chart.php). For instance char '1' is represented by number 49, char 'A' by number 65.
+
+Open Arduino Bluetooth Controller, connect to the hc-06 module and select LED/Lamp Control (should be the first option). It should print 0 or 1 on button click.
+
+![](/images/bluetooth-controll-led.png)
+
+### Criteria Table
+
+|       Criteria                               | Yes | No | Partly |
+| -------------------------------------------- | --- | -- | ------ |
+| The HC-06 is connected correctly             |     |    |        |
+| Serial monitor prints 0 or 1 on button click |     |    |        |
+
+
+## Task 2. LED Control
+
+Modify the code from the task 1 so it toggles a LED on and off on a button click.
+
+### Criteria Table
+
+|       Criteria                                               | Yes | No | Partly |
+| ------------------------------------------------------------ | --- | -- | ------ |
+| The HC-06 module is connected correctly                      |     |    |        |
+| LED is connected correctly to the Arduino                    |     |    |        |
+| LED switches its state (on/off) according on button click    |     |    |        |
+| Can explain how the code works                               |     |    |        |
+
+## Task 3. Multiple LED Control
+
+Write a code that controls 3 LEDs using "Switches" in the Arduino Bluetooth Controller app.
+
+> Consider using `BTSerial.readString` instead of `BTSerial.read`. Basically `BTSerial.readString` method reads the incoming characters, waits until the transfer of data will stop and sends the whole data as a string. `BTSerial.readString` is slower than `BTSerial.read` but a lot easier to use. 
+
+### Criteria Table
+
+|       Criteria                                               | Yes | No | Partly |
+| ------------------------------------------------------------ | --- | -- | ------ |
+| The HC-06 module is connected correctly                      |     |    |        |
+| All LEDs are connected correctly to the Arduino              |     |    |        |
+| All LEDs switche their states (on/off) on switch click       |     |    |        |
+| Can explain how the code works                               |     |    |        |
+
+## Task 4. RGB LED Control
+
+Write a code that controls RGB LED using "RGB LED Control" in the Arduino Bluetooth Controller app.
+
+### Criteria Table
+
+|       Criteria                                                  | Yes | No | Partly |
+| --------------------------------------------------------------- | --- | -- | ------ |
+| RGB LED is connected correctly to Arduino                       |     |    |        |
+| RGB LED color changes to choosen color on color picker          |     |    |        |
+| RGB LED color changes dynamically on color drag in color picker |     |    |        |
+| Can explain how the code works                                  |     |    |        |
