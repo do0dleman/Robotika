@@ -13,6 +13,7 @@ import remarkGfm from 'remark-gfm'
 import Pre from "~/app/_components/mdx/Pre"
 import Code from "~/app/_components/mdx/Code"
 import { visit } from 'unist-util-visit'
+import A from './A'
 
 function MDXRemoteWrapper({ source }: { source: string }) {
     return (
@@ -41,6 +42,7 @@ function MDXRemoteWrapper({ source }: { source: string }) {
                 ul: Ul,
                 Image: Image,
                 code: Code,
+                a: A,
             })} />
     )
 }

@@ -19,6 +19,7 @@ export default {
         h2: 'var(--color-h2)',
         h3: 'var(--color-h3)',
         link: 'var(--color-link)',
+        "link-active": 'var(--color-link-active)',
         info: 'var(--color-info)',
       }
     },
