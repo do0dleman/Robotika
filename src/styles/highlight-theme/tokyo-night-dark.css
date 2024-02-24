@@ -89,7 +89,9 @@ code.hljs {
 }
 /* Magenta */
 /*INFO: Control Keywords, Storage Types, Regex symbols and operators, HTML Attributes, Terminal Magenta */
-.hljs-name,
+.hljs-name {
+  color: hsl(41, 70%, 55%);
+}
 .hljs-keyword,
 .hljs-operator,
 .hljs-keyword,
