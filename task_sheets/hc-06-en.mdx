@@ -18,7 +18,7 @@ The HC-06 module has 4 pins:
 
 > HC-06 module uses 3.3V logic but arduino uses 5V logic. That means that if you want to send data from arduino to HC-06 you have to use **voltage divider** to drop signal voltage from 5V to ~3.3V. Nevertheles, arduino can read 3.3V digital signal, so no need to boost voltage of signal coming from HC-06 to arduino.
 
-To communicate with HC-06 using smartphone we will use Arduino Bluetooth Controller ([paly market](https://play.google.com/store/apps/details?id=com.giumig.apps.bluetoothserialmonitor)).
+To communicate with HC-06 using smartphone we will use Arduino Bluetooth Controller ([paly market](https://play.google.com/store/apps/details?id=com.giristudio.hc05.bluetooth.arduino.control)).
 
 In these tasks you will only use HC-06 to receive data from the phone, so you won't need to connect RXD port to Arduino. However, if you want to send data to a connected device or want to configure HC-06 using [AT command,](https://www.instructables.com/AT-command-mode-of-HC-05-Bluetooth-module/) you will have to use RXD pin.
 
