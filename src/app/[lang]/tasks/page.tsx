@@ -2,10 +2,10 @@ import matter from 'gray-matter';
 import fs from 'fs';
 import path from 'path';
 import getConfig from 'next/config';
-import { TaskModel } from '../../models/TaskModel';
+import { type TaskModel } from '../../models/TaskModel';
 import TaskCard from '../../_components/TaskCard';
 import H1 from '../../_components/mdx/H1';
-import { Locale } from 'i18n.config';
+import { type Locale } from 'i18n.config';
 import { getDictionary } from 'dictionaries/dictionary';
 
 export default async function TaskList({ params }: {
