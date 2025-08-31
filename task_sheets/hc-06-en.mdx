@@ -20,7 +20,7 @@ The HC-06 module has 4 pins:
 
 To communicate with HC-06 using smartphone we will use Arduino Bluetooth Controller ([paly market](https://play.google.com/store/apps/details?id=com.giristudio.hc05.bluetooth.arduino.control)).
 
-In these tasks you will only use HC-06 to receive data from the phone, so you won't need to connect RXD port to Arduino. However, if you want to send data to a connected device or want to configure HC-06 using [AT command,](https://www.instructables.com/AT-command-mode-of-HC-05-Bluetooth-module/) you will have to use RXD pin.
+In these tasks you will only use HC-06 to receive data from the phone, so you won't need to connect RXD port to Arduino. However, if you want to send data to the connected device or want to configure HC-06 using [AT command](https://www.instructables.com/AT-command-mode-of-HC-05-Bluetooth-module/), you will have to use RXD pin.
 
 ## Task 1. Setting up the module
 
@@ -52,7 +52,7 @@ void loop() {
 }
 ```
 
-> In this code example we must convert int to char to get 0 or 1. The main difference between char and int is that char represents a character, it may be '1' or 'A' or '@', but integer represents a number. However, under the hood char is also a number, but it represents **a character assigned to this number**. In Arduino characters are encoded according to [ASCII Table](https://www.techonthenet.com/ascii/chart.php). For instance char '1' is represented by number 49, char 'A' by number 65.
+> In this code example we must convert int to char to get 0 or 1. The main difference between char and int types is that the char type represents a character, it may be '1' or 'A' or '@', but the integer type represents a number. However, under the hood char is also a number, but it represents **a character assigned to this number**. In Arduino characters are being assigned numbers according to [ASCII Table](https://www.techonthenet.com/ascii/chart.php). For instance char '1' is represented by number 49, char 'A' by number 65.
 
 Open Arduino Bluetooth Controller, connect to the hc-06 module and select LED/Lamp Control (should be the first option). It should print 0 or 1 on button click.
 
