@@ -1,15 +1,13 @@
-import { getDictionary } from "dictionaries/dictionary"
-import { Locale } from "i18n.config"
+import { getDictionary } from "dictionaries/dictionary";
+import { type Locale } from "i18n.config";
 
-async function Footer({ params }: {
-    params: { lang: Locale }
-}) {
-    const { footer } = await getDictionary(params.lang)
+async function Footer({ params }: { params: { lang: Locale } }) {
+  const { footer } = await getDictionary(params.lang);
 
-    return (
-        <footer className="flex justify-center py-4 px-4 mt-12 md:mt-16 bg-bgSecondary">
-            <h3 className="text-h3 text-lg text-center">{footer.title}</h3>
-        </footer>
-    )
+  return (
+    <footer className="mt-12 flex justify-center bg-bgSecondary px-4 py-4 md:mt-16">
+      <h3 className="text-center text-lg text-h3">{footer.title}</h3>
+    </footer>
+  );
 }
-export default Footer
+export default Footer;

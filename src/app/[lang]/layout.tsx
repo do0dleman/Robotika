@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import Header from "../_components/Header";
-import { Locale } from "i18n.config";
+import { type Locale } from "i18n.config";
 import Footer from "../_components/Footer";
 
 const inter = Inter({
